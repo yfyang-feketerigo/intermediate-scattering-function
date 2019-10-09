@@ -19,6 +19,8 @@ int main()
 
 	input ifile(ifilename);
 
+	ifile.open_file();
+
 
 
 }
