@@ -16,12 +16,14 @@ private:
 	vector<double> data;
 	size_t totalline;
 public:
-	input(string _fname, size_t _headline = 0);
+	input(string _fname, size_t _headline);
+	input();
 
 	inline vector<double> get_data() const { return data; }
 	inline size_t get_linep() const { return linepointer; }
 	inline size_t get_totall() const { return totalline; }
 
+	inline void reset_filename(string _fname) { fname = _fname; };
 	void open_file();
 	void close_file();
 	void skiphead();

@@ -24,6 +24,18 @@ input::input(string _fname, size_t _headline)
 	}
 }
 
+input::input()
+{
+	fname = "default";
+	headline = 0;
+	linepointer = 0;
+	infile.open(fname);
+	totalline = 0;
+}
+
+
+
+
 
 void input::open_file()
 {

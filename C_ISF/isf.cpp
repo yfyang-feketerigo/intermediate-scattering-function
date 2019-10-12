@@ -6,11 +6,11 @@ isf::isf()
 	q = { 0.,0.,0. };
 }
 
-isf::isf(double _time, const vector<double>& _q)
+isf::isf(double _time, const array <double, 3> & _q)
 {
 	time = _time;
 	q = _q;
-	real = real = imagine = module = 0.;
+	real = imagine = module = 0.;
 }
 
 void isf::compute(const vector<particle>& pv)

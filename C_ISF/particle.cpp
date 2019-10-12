@@ -8,26 +8,21 @@ particle::particle()
 	group = gtype::none;
 }
 
-particle::particle(double _time, ptype _type, const vector<double>& dpm)
+particle::particle(double _time, size_t _id, ptype _type, const array<double, 4> & dpm)
 {
-	if (dpm.size() == 4)
-	{
-		dx = dpm[0];
-		dy = dpm[1];
-		dz = dpm[2];
-		d = dpm[3];
-	}
-	else
-	{
-		cout << "wrong particle initialize parameter!" << endl;
-		dx = dy = dz = d = 0.;
-	}
+
+	dx = dpm[0];
+	dy = dpm[1];
+	dz = dpm[2];
+	d = dpm[3];
+
 	group = gtype::none;
 	type = _type;
 	time = _time;
+	id = _id;
 }
 
-void particle::set_displacement(const vector<double>& dpm)
+particle::particle(double _time, size_t _id, ptype _type, const vector<double>& dpm)
 {
 	if (dpm.size() == 4)
 	{
@@ -38,9 +33,24 @@ void particle::set_displacement(const vector<double>& dpm)
 	}
 	else
 	{
-		cout << "wrong particle initialize parameter!" << endl;
-		dx = dy = dz = 0.;
+		cout << "dr vector must be size of 4!" << end;
+		dx = dy = dz = d = 0;
 	}
+
+	group = gtype::none;
+	type = _type;
+	time = _time;
+	id = _id;
+}
+
+void particle::set_displacement(const array<double, 4> & dpm)
+{
+
+	dx = dpm[0];
+	dy = dpm[1];
+	dz = dpm[2];
+	d = dpm[3];
+
 }
 
 void sort_d(vector<particle>& _pv)
@@ -75,7 +85,7 @@ size_t set_gtype(vector<particle>& _pvsort, double _thershold)
 	return i;
 }
 
-const vector<particle> get_group(const vector<particle>& _pv, gtype _group)
+const vector<particle> seek_group(const vector<particle>& _pv, gtype _group)
 {
 	vector<particle> pv_group;
 	for (size_t i = 0; i < _pv.size(); i++)
@@ -86,4 +96,17 @@ const vector<particle> get_group(const vector<particle>& _pv, gtype _group)
 		}
 	}
 	return vector<particle>();
+}
+
+const particle& seek_id(vector<particle>& pv, size_t _id)
+{
+	for (size_t i = 0; i < pv.size(); i++)
+	{
+		if (pv[i].get_id() == _id)
+		{
+			return pv[i];
+		}
+	}
+	cout << "no particle found!" << endl;
+	return pv[0];
 }

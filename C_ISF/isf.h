@@ -11,10 +11,10 @@ private:
 	double real;
 	double imagine;
 	double module;
-	vector<double> q;
+	array<double, 3> q;
 public:
 	isf();
-	isf(double _time, const vector<double>& _q);
+	isf(double _time, const array <double, 3> & _q);
 	void compute(const vector<particle>& pv);
 
 	inline double get_time() { return time; };
@@ -25,23 +25,15 @@ public:
 };
 
 template <typename T>
-double dot(const vector<T>& a, const vector<T>& b);
+double dot(const array<T, 3> & a, const array<T, 3> & b);
 
 template<typename T>
-inline double dot(const vector<T>& a, const vector<T>& b)
+inline double dot(const array<T, 3> & a, const array<T, 3> & b)
 {
-	if (a.size() != b.size())
+	double sum = 0;
+	for (size_t i = 0; i < a.size(); i++)
 	{
-		cout << "vector size not equal while dot" << endl;
-		exit(EXIT_FAILURE);
+		sum += a[i] * b[i];
 	}
-	else
-	{
-		double sum = 0;
-		for (size_t i = 0; i < a.size(); i++)
-		{
-			sum += a[i] * b[i];
-		}
-		return sum;
-	}
+	return sum;
 }

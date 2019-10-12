@@ -133,7 +133,6 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="isf.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="num_to_string.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="particle.cpp" />
   </ItemGroup>
