@@ -22,7 +22,7 @@ void isf::compute(const vector<particle>& pv)
 		cout << "partcile vector is empty!" << endl;
 		exit(EXIT_FAILURE);
 	}
-	if (time != pv.front().get_time)
+	if (time != pv.front().get_time())
 	{
 		cout << "time not matched!" << endl;
 		exit(EXIT_FAILURE);

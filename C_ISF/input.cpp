@@ -37,7 +37,7 @@ input::input()
 
 
 
-void input::open_file()
+bool input::open_file()
 {
 	if (!infile.is_open())
 	{
@@ -48,6 +48,7 @@ void input::open_file()
 		cout << "input file has already been opened!" << endl;
 		exit(EXIT_FAILURE);
 	}
+	return infile.is_open();
 }
 
 void input::close_file()
@@ -55,6 +56,9 @@ void input::close_file()
 	if (infile.is_open())
 	{
 		infile.close();
+		linepointer = 0;
+		totalline = 0;
+		data.clear();
 	}
 	else
 	{

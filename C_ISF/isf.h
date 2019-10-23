@@ -17,6 +17,8 @@ public:
 	isf(double _time, const array <double, 3> & _q);
 	void compute(const vector<particle>& pv);
 
+	inline void set_time(double _time) { time = _time; };
+
 	inline double get_time() { return time; };
 	inline double get_re() { return real; };
 	inline double get_im() { return imagine; };

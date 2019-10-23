@@ -19,12 +19,13 @@ public:
 	input(string _fname, size_t _headline);
 	input();
 
+	inline string get_fname() { return fname; };
 	inline vector<double> get_data() const { return data; }
 	inline size_t get_linep() const { return linepointer; }
 	inline size_t get_totall() const { return totalline; }
 
 	inline void reset_filename(string _fname) { fname = _fname; };
-	void open_file();
+	bool open_file();
 	void close_file();
 	void skiphead();
 	size_t move_to_line(size_t _line);

@@ -2,13 +2,14 @@
 
 particle::particle()
 {
+	id = 0;
 	type = ptype::none;
 	time = 0.;
 	dx = dy = dz = d = 0.;
 	group = gtype::none;
 }
 
-particle::particle(double _time, size_t _id, ptype _type, const array<double, 4> & dpm)
+particle::particle(double _time, size_t _id, ptype::ptype _type, const array<double, 4> & dpm)
 {
 
 	dx = dpm[0];
@@ -22,7 +23,7 @@ particle::particle(double _time, size_t _id, ptype _type, const array<double, 4>
 	id = _id;
 }
 
-particle::particle(double _time, size_t _id, ptype _type, const vector<double>& dpm)
+particle::particle(double _time, size_t _id, ptype::ptype _type, const vector<double>& dpm)
 {
 	if (dpm.size() == 4)
 	{
@@ -33,7 +34,7 @@ particle::particle(double _time, size_t _id, ptype _type, const vector<double>& 
 	}
 	else
 	{
-		cout << "dr vector must be size of 4!" << end;
+		cout << "dr vector must be size of 4!" << endl;
 		dx = dy = dz = d = 0;
 	}
 
@@ -85,7 +86,7 @@ size_t set_gtype(vector<particle>& _pvsort, double _thershold)
 	return i;
 }
 
-const vector<particle> seek_group(const vector<particle>& _pv, gtype _group)
+const vector<particle> seek_group(const vector<particle>& _pv, gtype::gtype _group)
 {
 	vector<particle> pv_group;
 	for (size_t i = 0; i < _pv.size(); i++)

@@ -5,8 +5,7 @@
 #include <vector>
 #include <iomanip>
 using namespace std;
-const int DEFAULT_EFFECT_NUM = 6;
-const int INTERVAL = 8;
+
 
 enum oformat
 {
@@ -18,6 +17,8 @@ enum oformat
 class output
 {
 private:
+	const int DEFAULT_EFFECT_NUM = 6;
+	const int INTERVAL = 8;
 	string fname;
 	vector<string> headlines;
 	ofstream outfile;
