@@ -11,43 +11,54 @@ int main()
 {
 	const size_t IFILE_HEADLINES = 9;
 	const size_t PARTICLE_DATASIZE = 6;
-	string ifilename = "dpm.0.44.0";
-	string ofilename = "test.isf.txt";
-	input ifile(ifilename, IFILE_HEADLINES);
+	const double TIMESTEP = 0.0025;
 
+	double q_module;
+
+	size_t init_step, end_step;
+	string ifilename_prefix;
+	cout << "enter initial timestep, end timestep, q, filename prefix:" << endl;
+	cin >> init_step >> end_step >> q_module >> ifilename_prefix;
 	//ifile.read_line();
 
 	size_t id;
 	ptype::ptype ptp;
 	array<double, 4> dr;
-	double time = 100000000 * 0.0025;
+	double time;
 	vector<particle> pv;
 
-	double qsingle = 1. / sqrt(3.) * 7.36;
-	array <double, 3> q = { qsingle,qsingle,qsingle };
+	double q_tmp = 1. / sqrt(3.) * q_module;
+	array <double, 3> q = { q_tmp,q_tmp,q_tmp };
 	isf isf_test(0., q);
+
+	string ifilename;
+	input ifile;
+	ifile.set_headline(IFILE_HEADLINES);
+
+	string ofilename = "isf." + ifilename_prefix;
 	output ofile(ofilename);
 	ofile.open_file();
 	ofile.set_format(oformat::scientfic);
 
-	for (size_t step = 0; step < 100; step++)
+	size_t delta_step = 1;
+	for (size_t step = init_step; step < end_step + 1; step += delta_step)
 	{
-		ifilename = "dpm.0.44." + number_to_string(step);
+		ifilename = ifilename_prefix + '.' + number_to_string(step);
 		//cout << ifilename << endl;
-		ifile.reset_filename(ifilename);
+		ifile.set_filename(ifilename);
 		if (ifile.open_file())
 		{
-			time = (double)step * 0.0025;
+			time = (double)step * TIMESTEP;
 			ifile.skiphead();
 			size_t lcounter = IFILE_HEADLINES;
-			while (!ifile.check_EOF())
+			while (!ifile.check_EOF() && ifile.read_line() != 0)
 			{
-				ifile.read_line();
 				lcounter++;
 				//cout << ifile.get_data().size() << endl;
 				if (ifile.get_data().size() != PARTICLE_DATASIZE)
 				{
 					cout << "file: " << ifile.get_fname() << ": wrong data size " << ifile.get_data().size() << " at line " << lcounter << endl;
+					cout << "data: " << ifile.get_data()[0] << endl;
 				}
 				else
 				{
@@ -61,6 +72,7 @@ int main()
 				}
 			}
 			ifile.close_file();
+			cout << pv.size() << endl;
 			isf_test.set_time(time);
 			isf_test.compute(pv);
 			//cout << isf_test.get_time() << ' ' << isf_test.get_im() << ' ' << isf_test.get_re() << endl;
@@ -68,18 +80,15 @@ int main()
 			ofile.write_line(isf_test.get_isf());
 			pv.clear();
 		}
+		if (step == 10000)
+		{
+			delta_step = 100;
+		}
+		if (step == 1000000)
+		{
+			delta_step = 1000;
+		}
 	}
 
-	/*cout << pv.size() << endl;
-	for (size_t i = 0; i < pv.size(); i++)
-	{
-		cout << pv[i].get_id() << ' ' << pv[i].get_ptype() << ' ';
-		for (size_t i1 = 0; i1 < 3; i1++)
-		{
-			cout << pv[i].get_displacement()[i1] << ' ';
-		}
-		cout << endl;
-	}
-	return 0;*/
 
 }

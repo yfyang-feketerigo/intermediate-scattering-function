@@ -112,10 +112,10 @@ size_t input::read_line()
 	string line;
 	if (infile.is_open())
 	{
-		if (infile.eof())
+		if (infile.eof() || (infile.peek() == EOF))
 		{
-			cout << "reach eof!" << endl;
-			cout << "data remain unchanged!" << endl;
+			cout << "file " << fname << " reach eof!" << endl;
+			//cout << "data remain unchanged!" << endl;
 			return 0;
 		}
 		else
@@ -123,6 +123,7 @@ size_t input::read_line()
 			//cout << "reading " << linepointer << "th line." << endl;
 			data.clear();
 			getline(infile, line);
+
 			trim(line);
 			istringstream ss(line);
 			while (!ss.eof())
@@ -133,6 +134,7 @@ size_t input::read_line()
 			}
 			linepointer += 1;
 			return data.size();
+
 		}
 	}
 	else

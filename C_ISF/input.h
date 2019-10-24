@@ -24,12 +24,14 @@ public:
 	inline size_t get_linep() const { return linepointer; }
 	inline size_t get_totall() const { return totalline; }
 
-	inline void reset_filename(string _fname) { fname = _fname; };
+	inline void set_headline(size_t _headline) { headline = _headline; };
+	inline void set_filename(string _fname) { fname = _fname; };
 	bool open_file();
 	void close_file();
 	void skiphead();
 	size_t move_to_line(size_t _line);
 	size_t read_line();
+
 
 
 	bool check_EOF() const;
