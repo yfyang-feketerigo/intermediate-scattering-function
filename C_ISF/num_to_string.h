@@ -1,3 +1,5 @@
+//used to transfer number data type to string data type
+//yfyang@ciac.ac.cn
 #pragma once
 #include <string>
 #include <sstream>
@@ -5,10 +7,10 @@ using std::string;
 using std::ostringstream;
 
 template <typename T>
-string number_to_string(T num, size_t precision);
+string number_to_string(T num, size_t precision); //transfer number data type to string data type, with SPECIFIED precision
 
 template <typename T>
-string number_to_string(T num);
+string number_to_string(T num);  //transfer number data type to string data type, with DEFAULT precision
 
 template<typename T>
 string number_to_string(T num, size_t precision)

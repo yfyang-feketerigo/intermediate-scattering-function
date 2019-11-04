@@ -48,4 +48,9 @@
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dpm.0.44.12">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>
