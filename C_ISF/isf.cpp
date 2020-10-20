@@ -3,10 +3,11 @@
 isf::isf()
 {
 	time = real = imagine = module = 0.;
+	real_iso = 0.;
 	q = { 0.,0.,0. };
 }
 
-isf::isf(double _time, const array <double, 3> & _q)
+isf::isf(double _time, const array <double, 3>& _q)
 {
 	time = _time;
 	q = _q;
@@ -17,6 +18,9 @@ void isf::compute(const vector<particle>& pv)
 {
 	double sum_im = 0.;
 	double sum_re = 0.;
+	double sum_re_iso = 0.;
+	double q_abs = sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2]);
+	//q = { 0,q_abs,0 };
 	if (pv.empty())
 	{
 		cout << "partcile vector is empty!" << endl;
@@ -38,14 +42,16 @@ void isf::compute(const vector<particle>& pv)
 		{
 			sum_im += sin(dot(q, pv[i].get_dr()));
 			sum_re += cos(dot(q, pv[i].get_dr()));
+			sum_re_iso += sin(q_abs * pv[i].get_d()) / q_abs / pv[i].get_d();
 		}
 	}
 	sum_im += sin(dot(q, pv.back().get_dr()));
 	sum_re += cos(dot(q, pv.back().get_dr()));
+	sum_re_iso += sin(q_abs * pv.back().get_d()) / q_abs / pv.back().get_d();
 	imagine = sum_im / pv.size();
 	real = sum_re / pv.size();
+	real_iso = sum_re_iso / pv.size();
 	module = sqrt(imagine * imagine + real * real);
 }
-
 
 

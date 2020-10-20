@@ -59,7 +59,7 @@ size_t output::write_line(vector<T> vec)
 	{
 		for (size_t i = 0; i < vec.size(); i++)
 		{
-			outfile.width((long long)effectnum + INTERVAL);
+			//outfile.width((long long)effectnum + INTERVAL);
 			outfile << setprecision((long long)effectnum - 1) << vec[i] << ' ';
 		}
 		outfile << endl;
@@ -69,7 +69,7 @@ size_t output::write_line(vector<T> vec)
 	{
 		for (size_t i = 0; i < vec.size(); i++)
 		{
-			outfile.width((long long)effectnum + INTERVAL);
+			//outfile.width((long long)effectnum + INTERVAL);
 			outfile << setprecision(effectnum) << vec[i] << ' ';
 		}
 		outfile << endl;

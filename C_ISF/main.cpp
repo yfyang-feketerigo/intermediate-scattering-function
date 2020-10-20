@@ -29,7 +29,7 @@ int main()
 
 	double q_tmp = 1. / sqrt(3.) * q_module;
 	array <double, 3> q = { q_tmp,q_tmp,q_tmp };
-	isf isf_test(0., q);
+	isf isf_obj(0., q);
 
 	string ifilename;
 	input ifile;
@@ -73,11 +73,11 @@ int main()
 			}
 			ifile.close_file();
 			cout << pv.size() << endl;
-			isf_test.set_time(time);
-			isf_test.compute(pv);
+			isf_obj.set_time(time);
+			isf_obj.compute(pv);
 			//cout << isf_test.get_time() << ' ' << isf_test.get_im() << ' ' << isf_test.get_re() << endl;
 			//vector<double> isf_vector({ isf_test.get_time(),isf_test.get_im(),isf_test.get_re(),isf_test.get_mod() });
-			ofile.write_line(isf_test.get_isf());
+			ofile.write_line(isf_obj.get_isf());
 			pv.clear();
 		}
 		if (step == 10000)
