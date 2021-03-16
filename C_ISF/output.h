@@ -41,53 +41,48 @@ public:
 
 
 	template<typename T>
-	size_t write_line(vector<T> vec);  //write a line to file with data(numerical data) in vector
-	template<> size_t write_line(vector<string> vec); //write a line to file with desription(string data), the format is different from former one
+	size_t write_line(vector<T> vec)  //write a line to file with data(numerical data) in vector
+	{
+		if (!outfile.is_open())
+		{
+			cout << "output file not open!" << endl;
+			return 0;
+		}
+		if (oformat::scientfic == of)
+		{
+			for (size_t i = 0; i < vec.size(); i++)
+			{
+				outfile << setprecision((long long)effectnum - 1) << vec[i] << ' ';
+			}
+			outfile << endl;
+			linecounter += 1;
+		}
+		else if (oformat::fixed == of)
+		{
+			for (size_t i = 0; i < vec.size(); i++)
+			{
+				outfile << setprecision(effectnum) << vec[i] << ' ';
+			}
+			outfile << endl;
+			linecounter += 1;
+		}
+		return linecounter;
+	}
 
+	template<> size_t write_line(vector<string> vec) //write a line to file with desription(string data), the format is different from former one
+	{
+		if (!outfile.is_open())
+		{
+			cout << "output file not open!" << endl;
+		}
+		for (size_t i = 0; i < vec.size(); i++)
+		{
+			outfile << vec[i] << endl;
+		}
+		linecounter += 1;
+		return linecounter;
+	}
 	size_t write_head(); //write headline description defined before
 };
 
-template<typename T>
-size_t output::write_line(vector<T> vec)
-{
-	if (!outfile.is_open())
-	{
-		cout << "output file not open!" << endl;
-		return 0;
-	}
-	if (oformat::scientfic == of)
-	{
-		for (size_t i = 0; i < vec.size(); i++)
-		{
-			//outfile.width((long long)effectnum + INTERVAL);
-			outfile << setprecision((long long)effectnum - 1) << vec[i] << ' ';
-		}
-		outfile << endl;
-		linecounter += 1;
-	}
-	else if (oformat::fixed == of)
-	{
-		for (size_t i = 0; i < vec.size(); i++)
-		{
-			//outfile.width((long long)effectnum + INTERVAL);
-			outfile << setprecision(effectnum) << vec[i] << ' ';
-		}
-		outfile << endl;
-		linecounter += 1;
-	}
-	return linecounter;
-}
 
-template<> size_t output::write_line(vector<string> vec)
-{
-	if (!outfile.is_open())
-	{
-		cout << "output file not open!" << endl;
-	}
-	for (size_t i = 0; i < vec.size(); i++)
-	{
-		outfile << vec[i] << endl;
-	}
-	linecounter += 1;
-	return linecounter;
-}
