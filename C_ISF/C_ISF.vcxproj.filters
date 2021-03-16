@@ -30,6 +30,9 @@
     <ClInclude Include="isf.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="get_files.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="input.cpp">

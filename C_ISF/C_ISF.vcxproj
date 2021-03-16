@@ -128,6 +128,7 @@
     <ClInclude Include="num_to_string.h" />
     <ClInclude Include="output.h" />
     <ClInclude Include="particle.h" />
+    <ClInclude Include="get_files.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="input.cpp" />
