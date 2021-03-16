@@ -43,18 +43,6 @@ int main()
 	output ofile(ofilename);
 	ofile.open_file();
 	ofile.set_format(oformat::scientfic);
-	//以上均为变量初始化、读入参数、设定格式
-	boost::filesystem::path dir_fullpath(dpm_dir);
-	vector<boost::filesystem::path> fpath_container;
-	fpath_container = GET_FILES::ScanFiles_stem(dpm_dir, ifilename_prefix);
-	GET_FILES::Extension_sort(fpath_container);
-	for (size_t i = 0; i < fpath_container.size(); i++)
-	{
-		cout << fpath_container[i].string() << endl;
-	}
-	cout << "dpm dir full path: " << dir_fullpath.string() << endl;
-	cout << "q_module = " << q_module << endl;
-	//开始对时间循环
 
 	cout << "starting time loop..." << endl;
 	for (size_t i = 0; i < fpath_container.size(); i++)
